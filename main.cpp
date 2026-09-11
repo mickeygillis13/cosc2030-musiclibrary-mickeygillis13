@@ -69,4 +69,13 @@ void displayLibrary(const vector<MusicTrack>& library){
     }
 }
 
+void saveLibraryToFile(const vector<MusicTrack>& library, const string& filename){
+    ofstream outfile(filename, ios::binary);
+    for(int i = 0; i < library.size(); i++){
+        outfile.write(reinterpret_cast<const char*>(&library[i]),sizeof(MusicTrack));
+    }
+    outfile.close();
+}
+
+
 
