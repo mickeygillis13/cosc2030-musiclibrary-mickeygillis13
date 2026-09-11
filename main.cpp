@@ -86,6 +86,17 @@ void loadLibraryFromFile(vector<MusicTrack>& library, const string& filename){
     infile.close();
 }
 
+void printMenu(){
+    cout << "================================================" << endl;
+    cout << "Enter the number you would like to proceed with: " << endl;
+    cout << "1. Add a new track to the library" << endl;
+    cout << "2. Display the library list" << endl;
+    cout << "3. Save the library to a file" << endl;
+    cout << "4. Load the library from a file" << endl;
+    cout << "5. Exit the program" << endl;
+    cout << "================================================" << endl;
+}
+
 
 
 
