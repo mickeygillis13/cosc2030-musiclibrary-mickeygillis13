@@ -29,7 +29,32 @@ void loadLibraryFromFile(vector<MusicTrack>& library, const string& filename);
 void printMenu();
 
 int main() {
-    return 0;
+    bool running = true;
+    vector<MusicTrack> library;
+    while (running) {
+        int userChoice = 0;
+        printMenu();
+        cin >> userChoice;
+        if (userChoice == 1) {
+            addTrack(library);
+        } else if (userChoice == 2) {
+            displayLibrary(library);
+        } else if (userChoice == 3) {
+            string filename;
+            cout << "Enter the filename to save the library: ";
+            cin >> filename;
+            saveLibraryToFile(library, filename);
+        } else if (userChoice == 4) {
+            string filename;
+            cout << "Enter the filename to load the library from: ";
+            cin >> filename;
+            loadLibraryFromFile(library, filename);
+        } else if (userChoice == 5) {
+            running = false;
+        } else {
+            cout << "Invalid choice. Please try again." << endl;
+        }
+    }
 }
 
 void addTrack(vector<MusicTrack>& library){
@@ -95,6 +120,7 @@ void printMenu(){
     cout << "4. Load the library from a file" << endl;
     cout << "5. Exit the program" << endl;
     cout << "================================================" << endl;
+    cout << "Choice: ";
 }
 
 
