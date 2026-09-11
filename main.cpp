@@ -35,6 +35,7 @@ int main() {
         int userChoice = 0;
         printMenu();
         cin >> userChoice;
+        cin.ignore();
         if (userChoice == 1) {
             addTrack(library);
         } else if (userChoice == 2) {
@@ -60,23 +61,23 @@ int main() {
 void addTrack(vector<MusicTrack>& library){
     MusicTrack newTrack;
 
-    cout << "title of track:" << endl;
+    cout << "Title of track:";
     cin.getline(newTrack.title, 100);
 
-    cout << "What album is the track from?:" << endl;
+    cout << "\nWhat album is the track from?:";
     cin.getline(newTrack.album, 100);
 
-    cout << "Artist of track:" << endl;
+    cout << "\nArtist of track:";
     cin.getline(newTrack.artist, 100);
 
-    cout << "Duration of track:" << endl;
+    cout << "\nDuration of track:";
     cin >> newTrack.duration;
     cin.ignore();
 
-    cout << "Genre of track:" << endl;
+    cout << "\nGenre of track:";
     cin.getline(newTrack.genre, 100);
 
-    cout << "Release year of track:" << endl;
+    cout << "\nRelease year of track:";
     cin >> newTrack.releaseYear;
     cin.ignore();
 
@@ -84,6 +85,10 @@ void addTrack(vector<MusicTrack>& library){
 }
 
 void displayLibrary(const vector<MusicTrack>& library){
+    if (library.size() == 0) {
+        cout << "Library is empty." << endl;
+        return;
+    }
     for(int i = 0; i < library.size(); i++){
         cout << "Title: " << library[i].title << endl;
         cout << "Album: " << library[i].album << endl;
@@ -104,6 +109,10 @@ void saveLibraryToFile(const vector<MusicTrack>& library, const string& filename
 
 void loadLibraryFromFile(vector<MusicTrack>& library, const string& filename){
     ifstream infile(filename, ios::binary);
+    if (!infile) {
+        cout << "Could not open file: " << filename << endl;
+        return;
+    }
     MusicTrack temp;
     while (infile.read(reinterpret_cast<char*>(&temp),sizeof(MusicTrack))){
         library.push_back(temp);
