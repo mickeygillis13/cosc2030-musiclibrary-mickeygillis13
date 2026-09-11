@@ -29,7 +29,7 @@ void loadLibraryFromFile(vector<MusicTrack>& library, const string& filename);
 void printMenu();
 
 int main() {
-
+    return 0;
 }
 
 void addTrack(vector<MusicTrack>& library){
@@ -76,6 +76,16 @@ void saveLibraryToFile(const vector<MusicTrack>& library, const string& filename
     }
     outfile.close();
 }
+
+void loadLibraryFromFile(vector<MusicTrack>& library, const string& filename){
+    ifstream infile(filename, ios::binary);
+    MusicTrack temp;
+    while (infile.read(reinterpret_cast<char*>(&temp),sizeof(MusicTrack))){
+        library.push_back(temp);
+    }
+    infile.close();
+}
+
 
 
 
